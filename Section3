@@ -1,0 +1,289 @@
+package com.assignement.section3;
+
+import java.util.Scanner;
+
+public class String3_1 {
+
+	public static void main(String[] args) {
+
+		int ch = 0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Choose The Operation");
+		System.out.println("1.Add Strings");
+		System.out.println("2.Replace odd positions with #");
+		System.out.println("3.Remove duplicate characters in the String");
+		System.out.println("4.Change odd characters to upper case");
+		System.out.println("Enter the Choice:");
+		ch = Integer.parseInt(sc.next());
+		switch (ch) {
+
+		case 1:
+			System.out.println("Enter the String for Concatenate:");
+			System.out.println("--------------------------------------------");
+
+			String s1 = sc.next();
+			String s2 = s1.concat(s1);
+
+			System.out.println("After Concatenation:" + s2);
+			break;
+		case 2:
+			System.out.println("Enter the String:");
+			String a = sc.next();
+			for (int i = 0; i < a.length(); i++) {
+				if (i % 2 != 0) {
+					a = a.substring(0, i - 1) + "#" + a.substring(i, a.length());
+				}
+			}
+			System.out.println(a);
+			break;
+		case 3:
+			System.out.println("Enter the String:");
+
+			String input = sc.next();
+			String str2 = "";
+			char[] ch1 = input.toCharArray();
+			for (char value : ch1) {
+
+				if (str2.indexOf(value) == -1) {
+					str2 = str2 + value;
+				}
+			}
+			System.out.println(str2);
+		case 4:
+			System.out.println("Enter the String:");
+
+			String str = sc.next();
+			
+			
+		char[] output = str.toCharArray();
+		    for(int i = 0; i < output.length; i++){
+		        if (i % 2 == 0) {
+		        	if((int)output[i]>=97&& (int)output[i]<=122)
+		            output[i] = (char) (output[i]-32);
+		        }
+		        else {
+		         
+		         }   
+		    }
+		    System.out.println(output);
+
+		}
+
+	}
+}
+-----------------------------------------------------
+package com.assignement.section3;
+
+import java.util.Scanner;
+
+public class Question3_2 {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the String: ");
+		String str = sc.nextLine();
+		char ch[] = str.toCharArray();
+		boolean res = isPositive(ch);
+		if (res)
+			System.out.println("The Given String is Positive String");
+		else
+			System.out.println("The Given String is not Positive");
+	}
+
+	public static boolean isPositive(char ch[]) {
+		boolean isPositive = true;
+		
+		for (int i = 0; i < ch.length; i++) {
+			for (int j = i+1; j < ch.length; j++) {
+				if((int)(ch[i]) > (int)(ch[j]))
+					return false;
+			}
+		}
+		return isPositive;
+
+	}
+
+}
+---------------------------------------------------------
+package com.assignement.section3;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Question3_3 {
+
+	public static void main(String[] args) {
+
+		{
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Enter the Date:");
+			String Date = scanner.nextLine();
+
+			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+			LocalDate pdate = LocalDate.parse(Date, dateTimeFormatter);
+			LocalDate now = LocalDate.now();
+
+			Period diff = Period.between(pdate, now);
+
+			System.out.println("\nDifference is" + diff.getYears() + "years, " + diff.getMonths() + " months and"
+					+ diff.getDays() + " days old\n\n");
+		}
+	}
+
+}
+---------------------------------------------
+package com.assignement.section3;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Question3_4 {
+
+	public static void main(String[] args) {
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter a Date(in dd-MM-yyyy format) :");
+		String day1 = scanner.nextLine();
+		System.out.println("Enter a Date(in dd-MM-yyyy format) :");
+		String day2 = scanner.nextLine();
+		SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			Date dateBefore = myFormat.parse(day1);
+			Date dateAfter = myFormat.parse(day2);
+			long difference = dateBefore.getTime() - dateAfter.getTime();
+			float daysBetween = (difference / (1000 * 60 * 60 * 24));
+			int monthsBetween = (int) (daysBetween / 30);
+			int yearsBetween = (int) (daysBetween / 365);
+
+			System.out.println("Number of Days between dates: " + daysBetween);
+			System.out.println("Number of Months between dates: " + monthsBetween);
+			System.out.println("Number of Years between dates: " + yearsBetween);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}
+---------------------------------------------------------
+package com.assignement.section3;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Question3_6 {
+	
+	public void getCurrentDateTimeWithTimeZone(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Zone Id:");
+		String zone=sc.next();
+		ZoneId zoneId = ZoneId.of(zone);
+	    LocalTime localTime=LocalTime.now(zoneId);
+	    LocalDate today = LocalDate.now( zoneId );
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	    String formattedTime=localTime.format(formatter);
+	    String dateformat = today.toString();
+	    System.out.println("Current time of the day: " + formattedTime+" date of day "+dateformat);
+	}
+
+	public static void main(String[] args) {
+		
+		Question3_6 question3_6= new Question3_6();
+		question3_6.getCurrentDateTimeWithTimeZone();
+
+	}
+
+}
+-------------------------------------------------------
+3.7(a)----------------------
+package com.assignement.section3;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+public class ageCalculator {
+	
+	Scanner sc = new Scanner(System.in);
+	
+	public static int calculateAge(Date dateOfBirth) {
+
+	    Calendar today = Calendar.getInstance();
+	    Calendar birthDate = Calendar.getInstance();
+
+	    int age = 0;
+
+	    birthDate.setTime(dateOfBirth);
+	    if (birthDate.after(today)) {
+	        throw new IllegalArgumentException("Can't be born in the future");
+	    }
+
+	    age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+
+	    // If birth date is greater than todays date (after 2 days adjustment of leap year) then decrement age one year   
+	    if ( (birthDate.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR) > 3) ||
+	            (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH ))){
+	        age--;
+
+	     // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
+	    }else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH )) &&
+	              (birthDate.get(Calendar.DAY_OF_MONTH) > today.get(Calendar.DAY_OF_MONTH ))){
+	        age--;
+	    }
+
+	    return age;
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Date Of Birth:");
+		String date1=sc.nextLine();  
+	    Date date2 = null;
+		try {
+			date2 = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(ageCalculator.calculateAge(date2));
+		
+
+	}
+
+}
+------------------------------
+3.7(b)-----------------------
+package com.assignement.section3;
+
+import Person23.Person23;;
+
+public class Question3_6b {
+
+	String firstName;
+	String lastName;
+
+
+	public String getFullName(String firstName, String lastName) {
+		
+		return (firstName +" "+  lastName);
+	}
+
+	public static void main(String[] args) {
+		Question3_6b qb = new Question3_6b();
+		System.out.println("The Full Name is:");
+		System.out.println(qb.getFullName("Akshay", "Patil"));
+
+	}
+
+}
+
+
